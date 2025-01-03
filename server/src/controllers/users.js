@@ -108,12 +108,46 @@ export const loginUser = async (req, res) => {
 
 // admin login
 export const adminLogin = async (req, res) => {
-  res.json({
-    message: "admin API working",
-  });
+  
+  try {
+    const {email, password} = req.body
+
+    if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
+     const token = jwt.sign(email+password, process.env.JWT_SECRET) 
+
+     res.json({
+      success: true,
+      token
+     })
+    }
+    else {
+      res.json({
+        success: false,
+        message: "failed to authenicate the admin"
+      })
+    }
+  } catch (error) {
+    console.log(error);
+
+    re.json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
-// creating a single user
+
+
+
+
+
+
+
+
+
+
+
+
 
 // fetching the all users
 export const getusers = async (req, res) => {
