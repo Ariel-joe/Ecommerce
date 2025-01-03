@@ -117,7 +117,7 @@ export const adminLogin = async (req, res) => {
 
      res.json({
       success: true,
-      token
+      data: token
      })
     }
     else {
