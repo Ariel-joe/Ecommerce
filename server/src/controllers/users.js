@@ -4,16 +4,8 @@ import jwt from "jsonwebtoken";
 import { User } from "../database/Models/user.js";
 
 // token for login after user registeration
-const createToken = () => {
-  return jwt.sign({id}, )
-};
-
-// login User
-
-export const loginUser = async (req, res) => {
-  res.json({
-    message: "login API working",
-  });
+const createToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET);
 };
 
 // register User
@@ -60,7 +52,58 @@ export const registerUser = async (req, res) => {
     });
 
     const user = await newUser.save();
-  } catch (error) {}
+
+    const token = createToken(user._id);
+
+    res.json({
+      success: true,
+      token,
+    });
+  } catch (error) {
+    console.log(error);
+
+    res.json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+// login User
+
+export const loginUser = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.json({
+        success: false,
+        message: "user doesn't exists",
+      });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (isMatch) {
+      const token = createToken(user._id);
+
+      res.json({ success: true, token });
+    } else {
+      res.json({
+        success: false,
+        message: "incorrect credentials",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+
+    re.json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 // admin login
@@ -71,23 +114,6 @@ export const adminLogin = async (req, res) => {
 };
 
 // creating a single user
-export const createUser = async (req, res) => {
-  try {
-    const newUser = await User.create(req.body);
-
-    res.status(201).json({
-      success: true,
-      data: newUser,
-    });
-  } catch (e) {
-    console.log(e);
-
-    return res.json({
-      success: false,
-      message: "please fill all the required fields",
-    });
-  }
-};
 
 // fetching the all users
 export const getusers = async (req, res) => {

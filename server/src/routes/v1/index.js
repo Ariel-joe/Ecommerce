@@ -6,7 +6,6 @@ import {
   updateProduct,
 } from "../../controllers/products.js";
 import {
-  createUser,
   deleteUser,
   editUser,
   getusers,
@@ -23,7 +22,6 @@ v1Router
 
 v1Router
   .route("/account")
-  .post(createUser)
   .get(getusers)
   .patch(editUser)
   .delete(deleteUser);
