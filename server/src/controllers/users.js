@@ -5,7 +5,7 @@ export const createUser = async (req, res) => {
   try {
     const newUser = await User.create(req.body);
 
-    return res.status(201).json({
+    res.status(201).json({
       success: true,
       data: newUser,
     });
@@ -14,7 +14,7 @@ export const createUser = async (req, res) => {
 
     return res.json({
       success: false,
-      message: " failed to create User!",
+      message: "please fill all the required fields",
     });
   }
 };

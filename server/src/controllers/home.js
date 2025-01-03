@@ -1,4 +1,20 @@
-export const getHome = (req, res) => {
+import { Product } from "../database/Models/product.js";
+
+export const getHome = async (req, res) => {
+  try {
+    const products = Product.find();
+
+    return res.status(200).json({
+      success: true,
+      data: products,
+    });
+  } catch (e) {
     res.json({
-      message: "this is the home route",
-    })}; 
+      success: false,
+      messsage: `Error: ${e}`,
+    });
+  }
+};
+
+
+
