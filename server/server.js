@@ -4,11 +4,13 @@ import "dotenv/config"
 import { getHome } from "./src/controllers/home.js";
 import { v1Router } from "./src/routes/v1/index.js";
 import { connectDB } from "./src/database/config.js";
+import connectCloudinary from "./src/database/cloudinary.js";
 
 
 // app configurations
 const app = express();
 connectDB();
+connectCloudinary()
 
 
 // middlewares
