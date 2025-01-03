@@ -5,6 +5,7 @@ import { getHome } from "./src/controllers/home.js";
 import { v1Router } from "./src/routes/v1/index.js";
 import { connectDB } from "./src/database/config.js";
 import connectCloudinary from "./src/database/cloudinary.js";
+import userRouter from "./src/routes/userRoute.js";
 
 
 // app configurations
@@ -19,6 +20,8 @@ app.use(cors())
 
 
 // api endpoints
+
+app.use("/api/user", userRouter)
 app.get("/", getHome);
 
 app.use("/v1", v1Router);

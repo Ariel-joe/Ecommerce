@@ -1,4 +1,74 @@
+import validator from "validator";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import { User } from "../database/Models/user.js";
+
+// token for login after user registeration
+const createToken = () => {
+  return jwt.sign({id}, )
+};
+
+// login User
+
+export const loginUser = async (req, res) => {
+  res.json({
+    message: "login API working",
+  });
+};
+
+// register User
+
+export const registerUser = async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+
+    // checking if email already in user
+
+    const exists = await User.findOne({ email });
+
+    if (exists) {
+      return res.json({
+        success: false,
+        message: "user already exists",
+      });
+    }
+
+    // validating email format & strong password
+    if (!validator.isEmail(email)) {
+      return res.json({
+        success: false,
+        message: "please enter a valid email",
+      });
+    }
+
+    if (password.length < 8) {
+      return res.json({
+        success: false,
+        message: "please enter a strong password",
+      });
+    }
+
+    // hashing user password
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    const newUser = new User({
+      name,
+      email,
+      password: hashedPassword,
+    });
+
+    const user = await newUser.save();
+  } catch (error) {}
+};
+
+// admin login
+export const adminLogin = async (req, res) => {
+  res.json({
+    message: "admin API working",
+  });
+};
 
 // creating a single user
 export const createUser = async (req, res) => {
