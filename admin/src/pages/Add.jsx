@@ -67,7 +67,7 @@ const Add = ({token}) => {
         <div>
             <p className='mb-2'>Upload Image</p>
 
-            <div className='flex gap-2'>
+            <div className='flex gap-8'>
                 <label htmlFor="image1">
                     <img className='w-20' src={ !image1 ? assets.uploadImage : URL.createObjectURL(image1)} alt="" />
                     <input onChange={(e)=>setImage1(e.target.files[0])} type="file"  id="image1" hidden />
@@ -162,7 +162,7 @@ const Add = ({token}) => {
         </div>
 
 
-        <button type='submit' className='w-28 py-3 mt-4 bg-black text-white'>ADD</button>
+        <button type='submit' className='w-36 py-2 mt-4 bg-black text-white text-base'>Add product</button>
     </form>
   )
 }
