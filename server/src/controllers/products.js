@@ -5,6 +5,7 @@ import { Product } from "../database/Models/product.js";
 
 const addProduct = async (req, res) => {
   try {
+
     const {
       name,
       description,
@@ -20,19 +21,30 @@ const addProduct = async (req, res) => {
     const image3 = req.files.image3 && req.files.image3[0];
     const image4 = req.files.image4 && req.files.image4[0];
 
+    // Check if any image is empty or missing
+    if (!image1 && !image2 && !image3 && !image4) {
+      return res.status(400).json({
+        success: false,
+        message: "At least one image is required",
+      });
+    }
+
     const images = [image1, image2, image3, image4].filter(
       (item) => item !== undefined
     );
 
     let imagesUrl = await Promise.all(
       images.map(async (item) => {
-        let result = await cloudinary.uploader.upload(item.path, {
+        if (!item) {
+          throw new Error("Empty file");
+        }
+        const result = await cloudinary.uploader.upload(item.path, {
           resource_type: "image",
         });
-
         return result.secure_url;
       })
     );
+    ;
 
     const productData = {
       name,
@@ -51,15 +63,17 @@ const addProduct = async (req, res) => {
 
     res.json({
       success: true,
-      message: "product added",
+      message: "Product added",
     });
   } catch (error) {
-    res.json({
+    res.status(400).json({
       success: false,
       message: error.message,
     });
   }
 };
+
+
 
 // lists product
 
@@ -72,7 +86,6 @@ const listProducts = async (req, res) => {
       data: products,
     });
   } catch (e) {
-    console.log(e);
 
     return res.status(500).json({
       success: false,
@@ -83,8 +96,23 @@ const listProducts = async (req, res) => {
 
 // remove product
 
-const removeProduct = async (req, res) => {};
+ const removeProduct = async (req, res) => {
 
+  try {
+    const deletedP = await Product.findByIdAndDelete(req.body.id);
+
+    res.status(200).json({
+      success: true,
+      message: "product removed",
+    });
+  } catch (e) {
+
+    return res.status(500).json({
+      success: false,
+      message: " please try again!",
+    });
+  }
+};
 // single product info
 
 const singleProduct = async (req, res) => {
@@ -97,7 +125,6 @@ const singleProduct = async (req, res) => {
       data: singleProduct,
     });
   } catch (error) {
-    console.log(e);
 
     return res.status(500).json({
       success: false,
@@ -131,7 +158,6 @@ export const updateProduct = async (req, res) => {
       data: updatedProduct,
     });
   } catch (e) {
-    console.log(e);
 
     res.status(500).json({
       success: false,
@@ -153,7 +179,6 @@ export const deleteProduct = async (req, res) => {
       data: deletedP,
     });
   } catch (e) {
-    console.log(e);
 
     return res.status(500).json({
       success: false,
