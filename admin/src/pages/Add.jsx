@@ -69,22 +69,22 @@ const Add = ({token}) => {
 
             <div className='flex gap-8'>
                 <label htmlFor="image1">
-                    <img className='w-20' src={ !image1 ? assets.uploadImage : URL.createObjectURL(image1)} alt="" />
+                    <img className='w-12' src={ !image1 ? assets.uploadImage : URL.createObjectURL(image1)} alt="" />
                     <input onChange={(e)=>setImage1(e.target.files[0])} type="file"  id="image1" hidden />
                 </label>
 
                 <label htmlFor="image2">
-                    <img className='w-20' src={ !image2 ? assets.uploadImage : URL.createObjectURL(image2)} alt="" />
+                    <img className='w-12' src={ !image2 ? assets.uploadImage : URL.createObjectURL(image2)} alt="" />
                     <input onChange={(e)=>setImage2(e.target.files[0])} type="file"  id="image2" hidden />
                 </label>
 
                 <label htmlFor="image3">
-                    <img className='w-20' src={ !image3 ? assets.uploadImage : URL.createObjectURL(image3)} alt="" />
+                    <img className='w-12' src={ !image3 ? assets.uploadImage : URL.createObjectURL(image3)} alt="" />
                     <input onChange={(e)=>setImage3(e.target.files[0])} type="file"  id="image3" hidden />
                 </label>
 
                 <label htmlFor="image4">
-                    <img className='w-20' src={ !image4 ? assets.uploadImage : URL.createObjectURL(image4)} alt="" />
+                    <img className='w-12' src={ !image4 ? assets.uploadImage : URL.createObjectURL(image4)} alt="" />
                     <input onChange={(e)=>setImage4(e.target.files[0])} type="file"  id="image4" hidden />
                 </label>
             </div>
@@ -105,7 +105,7 @@ const Add = ({token}) => {
 
             <div>
                 <p className='mb-2'>Product category</p>
-                <select onChange={(e)=>setCategory(e.target.value)} className='w-full px-3 py-2'>
+                <select onChange={(e)=>setCategory(e.target.value)} className='w-full px-3 py-1'>
                     <option value="Men">Men</option>
                     <option value="Women">Women</option>
                     <option value="kids">Kids</option>
@@ -114,7 +114,7 @@ const Add = ({token}) => {
 
             <div>
                 <p className='mb-2'>Sub category</p>
-                <select onChange={(e)=>setSubCategory(e.target.value)} className='w-full px-3 py-2'>
+                <select onChange={(e)=>setSubCategory(e.target.value)} className='w-full px-3 py-1'>
                     <option value="Topwear">Topwear</option>
                     <option value="Bottomwear">Bottomwear</option>
                     <option value="Winterwear">Winterwear</option>
@@ -124,7 +124,7 @@ const Add = ({token}) => {
 
             <div>
                 <p className='mb-2'>product price</p>
-                <input onChange={(e)=>setPrice(e.target.value)} value={price} className='w-full px-3 py-2 sm:w-[120px]' type="number" placeholder='25'/>
+                <input onChange={(e)=>setPrice(e.target.value)} value={price} className='w-full px-3 py-1 sm:w-[120px]' type="number" placeholder='25'/>
             </div>
         </div>
         
