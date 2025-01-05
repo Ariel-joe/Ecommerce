@@ -162,7 +162,7 @@ const Add = ({token}) => {
         </div>
 
 
-        <button type='submit' className='w-36 py-2 mt-4 bg-black text-white text-base'>Add product</button>
+        <button type='submit' className='rounded-md w-36 py-2 mt-4 bg-black text-white text-base'>Add product</button>
     </form>
   )
 }

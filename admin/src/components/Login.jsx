@@ -29,12 +29,14 @@ const Login = ({ setToken }) => {
   return (
     <div className="min-h-screen flex items-center justify-center w-full">
       <div className="bg-white shadow-md rounded-lg px-8 py-6 max-w-md">
-        <div className="flex items-center justify-center">
+        <div className="flex flex-col items-center justify-center mb-3">
           <img
             className="w-[90px] sm:w-[45%] mb-4"
             src={assets.primaryLogo}
             alt="logo"
           />
+
+          <h1 className="mt-3 font-bold text-xl">Welcome back 😇!</h1>
         </div>
 
         <form onSubmit={onSubmitHandler}>
@@ -66,7 +68,7 @@ const Login = ({ setToken }) => {
 
           <button
             type="submit"
-            className="bg-black text-white mt-3 py-2 px-4  w-full sm:px-8 sm:py-2 text-sm sm:text-base"
+            className="bg-black rounded-md text-white mt-3 py-2 px-4  w-full sm:px-8 sm:py-2 text-sm sm:text-base"
           >
             Log In
           </button>
