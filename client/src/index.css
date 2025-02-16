@@ -5,6 +5,6 @@
   font-family: Outfit;
 }
 
-Link.active hr {
+a.active hr{
   display: block;
 }
