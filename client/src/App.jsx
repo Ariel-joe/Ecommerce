@@ -1,9 +1,17 @@
 import React from "react";
+import { Outlet } from "react-router";
+import { Navbar } from "./components/Navbar";
 
 const App = () => {
   return (
     <>
-      <div>this is the client side</div>
+      <div>
+        <Navbar />
+      </div>
+
+      <div>
+        <Outlet />
+      </div>
     </>
   );
 };
