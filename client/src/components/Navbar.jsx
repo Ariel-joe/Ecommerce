@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { assets } from "../assets/assets";
 import { Link, NavLink } from "react-router";
 import { CiMenuFries, CiSearch, CiShoppingCart, CiUser } from "react-icons/ci";
+import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
 
 const Navbar = () => {
-
-  const [visible, setVisible] = useState(false)
-
+  const [visible, setVisible] = useState(false);
 
   return (
     <>
@@ -68,9 +67,39 @@ const Navbar = () => {
 
           {/* humburger */}
 
-          <CiMenuFries onClick={() => setVisible(true)} size={28} className="cursor-pointer sm:hidden" />
+          <CiMenuFries
+            onClick={() => setVisible(true)}
+            size={28}
+            className="cursor-pointer sm:hidden"
+          />
 
-             {/*small screen menu  */}
+          {/*small screen menu  */}
+
+          <div
+            className={`absolute top-0 right-0 bottom-0 overflow-hidden bg-white transition-all ${
+              visible ? "w-full" : "w-0"
+            }`}
+          >
+            <div className="flex flex-col text-gray-600">
+              <div
+                onClick={() => setVisible(false)}
+                className="flex items-center gap-4 p-3 cursor-pointer"
+              >
+                <MdOutlineKeyboardDoubleArrowDown
+                  size={28}
+                  className="rotate-90"
+                />
+                <p>back</p>
+              </div>
+
+              {/* navlinks */}
+
+              <NavLink onClick={() => setVisible(false)} className="py-2 pl-6 border" to={"/"}>HOME</NavLink>
+              <NavLink onClick={() => setVisible(false)} className="py-2 pl-6 border" to={"/collection"}>COLLECTION</NavLink>
+              <NavLink onClick={() => setVisible(false)} className="py-2 pl-6 border" to={"/about"}>ABOUT</NavLink>
+              <NavLink onClick={() => setVisible(false)} className="py-2 pl-6 border" to={"/contact"}>CONTACT</NavLink>
+            </div>
+          </div>
         </div>
       </div>
     </>
