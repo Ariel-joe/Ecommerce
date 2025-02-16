@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { assets } from "../assets/assets";
 import { Link, NavLink } from "react-router";
-import { CiSearch, CiShoppingCart, CiUser } from "react-icons/ci";
+import { CiMenuFries, CiSearch, CiShoppingCart, CiUser } from "react-icons/ci";
 
 const Navbar = () => {
+
+  const [visible, setVisible] = useState(false)
+
+
   return (
     <>
       <div className="flex items-center justify-between py-5 font-medium">
@@ -61,6 +65,12 @@ const Navbar = () => {
               10
             </p>
           </Link>
+
+          {/* humburger */}
+
+          <CiMenuFries onClick={() => setVisible(true)} size={28} className="cursor-pointer sm:hidden" />
+
+             {/*small screen menu  */}
         </div>
       </div>
     </>
