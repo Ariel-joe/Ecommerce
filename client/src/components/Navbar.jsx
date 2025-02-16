@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { assets } from "../assets/assets";
 import { Link, NavLink } from "react-router";
 import { CiMenuFries, CiSearch, CiShoppingCart, CiUser } from "react-icons/ci";
-import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
+import { RiCloseLargeLine } from "react-icons/ri";
 
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
@@ -16,10 +16,11 @@ const Navbar = () => {
           alt="kladi outfit logo"
         />
 
+        {/* navbar for other screen excluding the small screen */}
         <ul className="hidden sm:flex gap-5 text-sm text-gray-700">
           <NavLink to={"/"} className="flex flex-col items-center gap-1">
             <p>HOME</p>
-            <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
+            <hr className="w-2/4-none h-[1.5px] bg-gray-700 hidden" />
           </NavLink>
 
           <NavLink
@@ -27,17 +28,17 @@ const Navbar = () => {
             className="flex flex-col items-center gap-1"
           >
             <p>COLLECTION</p>
-            <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
+            <hr className="w-2/4-none h-[1.5px] bg-gray-700 hidden" />
           </NavLink>
 
           <NavLink to={"/about"} className="flex flex-col items-center gap-1">
             <p>ABOUT</p>
-            <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
+            <hr className="w-2/4-none h-[1.5px] bg-gray-700 hidden" />
           </NavLink>
 
           <NavLink to={"/contact"} className="flex flex-col items-center gap-1">
             <p>CONTACT</p>
-            <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
+            <hr className="w-2/4-none h-[1.5px] bg-gray-700 hidden" />
           </NavLink>
         </ul>
 
@@ -85,19 +86,39 @@ const Navbar = () => {
                 onClick={() => setVisible(false)}
                 className="flex items-center gap-4 p-3 cursor-pointer"
               >
-                <MdOutlineKeyboardDoubleArrowDown
-                  size={28}
-                  className="rotate-90"
-                />
-                <p>back</p>
+                <RiCloseLargeLine size={28} className="rotate-90" />
               </div>
 
               {/* navlinks */}
 
-              <NavLink onClick={() => setVisible(false)} className="py-2 pl-6 border" to={"/"}>HOME</NavLink>
-              <NavLink onClick={() => setVisible(false)} className="py-2 pl-6 border" to={"/collection"}>COLLECTION</NavLink>
-              <NavLink onClick={() => setVisible(false)} className="py-2 pl-6 border" to={"/about"}>ABOUT</NavLink>
-              <NavLink onClick={() => setVisible(false)} className="py-2 pl-6 border" to={"/contact"}>CONTACT</NavLink>
+              <NavLink
+                onClick={() => setVisible(false)}
+                className="py-2 pl-6"
+                to={"/"}
+              >
+                HOME
+              </NavLink>
+              <NavLink
+                onClick={() => setVisible(false)}
+                className="py-2 pl-6"
+                to={"/collection"}
+              >
+                COLLECTION
+              </NavLink>
+              <NavLink
+                onClick={() => setVisible(false)}
+                className="py-2 pl-6"
+                to={"/about"}
+              >
+                ABOUT
+              </NavLink>
+              <NavLink
+                onClick={() => setVisible(false)}
+                className="py-2 pl-6"
+                to={"/contact"}
+              >
+                CONTACT
+              </NavLink>
             </div>
           </div>
         </div>
