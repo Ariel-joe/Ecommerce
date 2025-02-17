@@ -10,7 +10,7 @@ const App = () => {
           <Navbar />
         </div>
 
-        <div>
+        <div className="mx-4 sm:mx-10">
           <Outlet />
         </div>
       </div>

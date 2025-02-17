@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { assets } from "../assets/assets";
-import { Link, NavLink } from "react-router";
+import { NavLink, Link } from "react-router";
 import { CiMenuFries, CiSearch, CiShoppingCart, CiUser } from "react-icons/ci";
 import { RiCloseLargeLine } from "react-icons/ri";
 

@@ -12,23 +12,26 @@ import { PlaceOrder } from "./pages/PlaceOrder.jsx";
 import { Product } from "./pages/Product.jsx";
 import { Collection } from "./pages/Collection.jsx";
 import { Contact } from "./pages/Contact.jsx";
+import { ShopContextProvider } from "./context/Shopcontext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route index element={<Home />} />
-          <Route path="collection" element={<Collection />} />
-          <Route path="about" element={<About />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="cart" element={<Cart />} />
-          <Route path="login" element={<Login />} />
-          <Route path="orders" element={<Orders />} />
-          <Route path="placeorders" element={<PlaceOrder />} />
-          <Route path="product/:productId" element={<Product />} />
-        </Route>
-      </Routes>
+      <ShopContextProvider>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route index element={<Home />} />
+            <Route path="collection" element={<Collection />} />
+            <Route path="about" element={<About />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="cart" element={<Cart />} />
+            <Route path="login" element={<Login />} />
+            <Route path="orders" element={<Orders />} />
+            <Route path="placeorders" element={<PlaceOrder />} />
+            <Route path="product/:productId" element={<Product />} />
+          </Route>
+        </Routes>
+      </ShopContextProvider>
     </BrowserRouter>
   </StrictMode>
 );
