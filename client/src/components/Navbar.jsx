@@ -10,11 +10,12 @@ const Navbar = () => {
   return (
     <>
       <div className="flex items-center justify-between py-5 font-medium">
+        <Link to={"/"}>
         <img
           src={assets.primaryLogo}
           className="w-20"
           alt="kladi outfit logo"
-        />
+        /></Link>
 
         {/* navbar for other screen excluding the small screen */}
         <ul className="hidden sm:flex gap-5 text-sm text-gray-700">
