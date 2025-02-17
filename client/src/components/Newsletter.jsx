@@ -1,6 +1,14 @@
 import React from "react";
 
 const Newsletter = () => {
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault()
+
+    
+
+  }
+
   return (
     <>
       <div className="text-center">
@@ -13,7 +21,7 @@ const Newsletter = () => {
         </p>
 
         {/* form component */}
-        <form className="w-full sm:w-1/2 flex items-center gap-3 mx-auto my-6 border pl-3">
+        <form onSubmit={onSubmitHandler} className="w-full sm:w-1/2 flex items-center gap-3 mx-auto my-6 border pl-3">
           <input
             className="w-full sm:flex-1 outline-none"
             type="email"
