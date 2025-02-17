@@ -5,6 +5,15 @@
   font-family: Outfit;
 }
 
-a.active hr {
+a.active hr{
   display: block;
+}
+
+
+@media (max-width:640px) {
+  a.active{
+    background-color: black;
+    color: white;
+  }
+  
 }
