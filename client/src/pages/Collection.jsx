@@ -1,15 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/Shopcontext";
 import { assets } from "../assets/assets";
+import { Title } from "../components/Title";
+import { ProductCard } from "../components/ProductCard";
 
 const Collection = () => {
   const { products } = useContext(ShopContext);
   const [showFilter, setShowFilter] = useState(false);
-  // const [productlist, setProductlist] = useState([]);
+  const [filterProducts, setfilterProducts] = useState([]);
+  const [category, setCategory] = useState([])
+  const [category, setCategory] = useState([])
 
-  // useEffect(() => {
-  //   const productCollection = setProductlist(products);
-  // }, []);
+  useEffect(() => {
+    setfilterProducts(products);
+  }, []);
 
   return (
     <>
@@ -76,9 +80,35 @@ const Collection = () => {
             </div>
           </div>
         </div>
-      </div>
 
-      {/* collections */}
+        {/* collections */}
+
+        <div className="flex-1">
+          <div className="flex justify-between text-base sm:text-2xl mb-4">
+            <Title text1={"ALL"} text2={"COLLECTIONS"} />
+
+            {/* sorting */}
+            <select className="border border-gray-300 text-sm px-2">
+              <option value="relevant">Sort by: Relevant</option>
+              <option value="low-high">Sort by: Low to High</option>
+              <option value="high-low">Sort by: High to Low</option>
+            </select>
+          </div>
+
+          {/* collection of products */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
+            {filterProducts.map((item, index) => (
+              <ProductCard
+                key={index}
+                id={item._id}
+                image={item.image}
+                name={item.name}
+                price={item.price}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
     </>
   );
 };
