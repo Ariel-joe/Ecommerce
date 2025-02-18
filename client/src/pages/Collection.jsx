@@ -11,6 +11,9 @@ const Collection = () => {
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
 
+
+
+  // selecting filter options for category
   const toggleCategory = (e) => {
     if (category.includes(e.target.value)) {
       setCategory((prev) => prev.filter((item) => item !== e.target.value));
@@ -19,6 +22,8 @@ const Collection = () => {
     }
   };
 
+
+  // filtering options for the subcategory
   const toggleSubCategory = (e) => {
     if (subCategory.includes(e.target.value)) {
       setSubCategory((prev) => prev.filter((item) => item !== e.target.value));
@@ -27,13 +32,37 @@ const Collection = () => {
     }
   };
 
-  useEffect(() => {
-    setfilterProducts(products);
-  }, []);
 
+
+  // function to apply the selected filters
+  const applyFilter = () => {
+    let productsCopy = products.slice();
+
+    // category
+    if (category.length > 0) {
+      productsCopy = productsCopy.filter((item) =>
+        category.includes(item.category)
+      );
+
+      setfilterProducts(productsCopy);
+    }
+
+    // subcategory
+
+    if (subCategory.length > 0) {
+      productsCopy = productsCopy.filter((item) =>
+        subCategory.includes(item.subCategory)
+      );
+
+      setfilterProducts(productsCopy);
+    }
+  };
+
+
+  // calling the function that applies filters
   useEffect(() => {
-    console.log(category);
-  }, [category]);
+    applyFilter();
+  }, [category, subCategory]);
 
   return (
     <>
@@ -67,7 +96,7 @@ const Collection = () => {
                   className="w-3"
                   value={"Men"}
                   onChange={toggleCategory}
-                />{" "}
+                />
                 Men
               </p>
 
@@ -77,7 +106,7 @@ const Collection = () => {
                   className="w-3"
                   value={"Women"}
                   onChange={toggleCategory}
-                />{" "}
+                />
                 Women
               </p>
 
@@ -87,7 +116,7 @@ const Collection = () => {
                   className="w-3"
                   value={"Kids"}
                   onChange={toggleCategory}
-                />{" "}
+                />
                 Kids
               </p>
             </div>
@@ -102,17 +131,32 @@ const Collection = () => {
             <p className="mb-3 text-sm font-medium">TYPE</p>
             <div className="flex flex-col gap-2 text-sm font-light text-gray-700">
               <p className="flex gap-2">
-                <input type="checkbox" className="w-3" value={"Topwear"} />{" "}
+                <input
+                  type="checkbox"
+                  className="w-3"
+                  onChange={toggleSubCategory}
+                  value={"Topwear"}
+                />
                 Topwear
               </p>
 
               <p className="flex gap-2">
-                <input type="checkbox" className="w-3" value={"Bottomwear"} />{" "}
+                <input
+                  type="checkbox"
+                  className="w-3"
+                  onChange={toggleSubCategory}
+                  value={"Bottomwear"}
+                />
                 Bottomwear
               </p>
 
               <p className="flex gap-2">
-                <input type="checkbox" className="w-3" value={"Winterwear"} />{" "}
+                <input
+                  type="checkbox"
+                  className="w-3"
+                  onChange={toggleSubCategory}
+                  value={"Winterwear"}
+                />
                 Winterwear
               </p>
             </div>
