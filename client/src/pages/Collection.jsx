@@ -10,8 +10,7 @@ const Collection = () => {
   const [filterProducts, setfilterProducts] = useState([]);
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
-
-
+  const [sortType, setSortType] = useState("relevant");
 
   // selecting filter options for category
   const toggleCategory = (e) => {
@@ -22,7 +21,6 @@ const Collection = () => {
     }
   };
 
-
   // filtering options for the subcategory
   const toggleSubCategory = (e) => {
     if (subCategory.includes(e.target.value)) {
@@ -31,8 +29,6 @@ const Collection = () => {
       setSubCategory((prev) => [...prev, e.target.value]);
     }
   };
-
-
 
   // function to apply the selected filters
   const applyFilter = () => {
@@ -58,11 +54,38 @@ const Collection = () => {
     }
   };
 
+  // function for sorting by prices
+  const sortProducts = () => {
+    let filteredProductsCopy = filterProducts.slice();
+
+    switch (sortType) {
+      case "Low to High":
+        setfilterProducts(
+          filteredProductsCopy.sort((a, b) => a.price - b.price)
+        );
+        break;
+
+      case "High to Low":
+        setfilterProducts(
+          filteredProductsCopy.sort((a, b) => b.price - a.price)
+        );
+        break;
+
+      default:
+        applyFilter();
+        break;
+    }
+  };
 
   // calling the function that applies filters
   useEffect(() => {
     applyFilter();
   }, [category, subCategory]);
+
+  // calling the sorting function here
+  useEffect(() => {
+    sortProducts();
+  }, [sortType]);
 
   return (
     <>
@@ -170,7 +193,10 @@ const Collection = () => {
             <Title text1={"ALL"} text2={"COLLECTIONS"} />
 
             {/* sorting */}
-            <select className="border border-gray-300 text-sm px-2">
+            <select
+              onChange={(e) => setSortType(e.target.value)}
+              className="border border-gray-300 text-sm px-2"
+            >
               <option value="relevant">Sort by: Relevant</option>
               <option value="low-high">Sort by: Low to High</option>
               <option value="high-low">Sort by: High to Low</option>
