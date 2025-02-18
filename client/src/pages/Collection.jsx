@@ -5,7 +5,7 @@ import { Title } from "../components/Title";
 import { ProductCard } from "../components/ProductCard";
 
 const Collection = () => {
-  const { products } = useContext(ShopContext);
+  const { products, search, showSearch } = useContext(ShopContext);
   const [showFilter, setShowFilter] = useState(false);
   const [filterProducts, setfilterProducts] = useState([]);
   const [category, setCategory] = useState([]);
@@ -34,6 +34,11 @@ const Collection = () => {
   const applyFilter = () => {
     let productsCopy = products.slice();
 
+    // search
+    if (showSearch && search) {
+      productsCopy = productsCopy.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
+    }
+
     // category
     if (category.length > 0) {
       productsCopy = productsCopy.filter((item) =>
@@ -59,13 +64,13 @@ const Collection = () => {
     let filteredProductsCopy = filterProducts.slice();
 
     switch (sortType) {
-      case "Low to High":
+      case "low-high":
         setfilterProducts(
           filteredProductsCopy.sort((a, b) => a.price - b.price)
         );
         break;
 
-      case "High to Low":
+      case "high-low":
         setfilterProducts(
           filteredProductsCopy.sort((a, b) => b.price - a.price)
         );
@@ -77,10 +82,15 @@ const Collection = () => {
     }
   };
 
+  // calling all the products before when the page first load
+  useEffect(() => {
+    setfilterProducts(products);
+  }, []);
+
   // calling the function that applies filters
   useEffect(() => {
     applyFilter();
-  }, [category, subCategory]);
+  }, [category, subCategory, search, showSearch]);
 
   // calling the sorting function here
   useEffect(() => {

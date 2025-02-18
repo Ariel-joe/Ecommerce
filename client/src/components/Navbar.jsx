@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { assets } from "../assets/assets";
 import { NavLink, Link } from "react-router";
 import { CiMenuFries, CiSearch, CiShoppingCart, CiUser } from "react-icons/ci";
 import { RiCloseLargeLine } from "react-icons/ri";
+import { ShopContext } from "../context/Shopcontext";
 
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
+  const {setShowSearch} = useContext(ShopContext)
 
   return (
     <>
-      <div className="flex items-center justify-between py-5 font-medium">
+      <div className="flex items-center justify-between pb-5 pt-2 font-medium">
         <Link to={"/"}>
           <img
             src={assets.primaryLogo}
@@ -71,7 +73,7 @@ const Navbar = () => {
 
         <div className="flex items-center gap-6">
           {/* search icon */}
-          <CiSearch size={28} className="cursor-pointer" />
+          <CiSearch onClick={() => setShowSearch(true)} size={28} className="cursor-pointer" />
 
           {/* profile icon */}
           <div className="group relative">
