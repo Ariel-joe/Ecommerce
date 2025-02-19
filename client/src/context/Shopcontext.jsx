@@ -6,7 +6,7 @@ export const ShopContext = createContext();
 
 const ShopContextProvider = (props) => {
   const currency = "Ksh ";
-  const delivery_fee = 1000;
+  const delivery_fee = 380;
   const [search, setSearch] = useState("");
   const [showSearch, setShowSearch] = useState(false);
   const [cartItems, setCartItems] = useState({});
@@ -73,12 +73,38 @@ const ShopContextProvider = (props) => {
     
   }
 
+  // getting the total amount in the cat
+
+  const getCartAmount =  () => {
+    let totalAmount = 0;
+
+    for(const items in cartItems) {
+      let itemInfo = products.find((product) => product._id === items)
+
+      for(const item in cartItems[items]) {
+        try {
+          if (cartItems[items][item] > 0){
+
+
+            totalAmount += itemInfo.price * cartItems[items][item]
+
+          } 
+        } catch (error) {
+          
+        }
+      }
+    }
+
+    return totalAmount;
+  }
+
 
 
 
   const value = {
     filterProducts,
     updateQuantity,
+    getCartAmount,
     products,
     currency,
     delivery_fee,
