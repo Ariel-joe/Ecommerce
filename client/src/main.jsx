@@ -14,10 +14,12 @@ import { Collection } from "./pages/Collection.jsx";
 import { Contact } from "./pages/Contact.jsx";
 import { ShopContextProvider } from "./context/Shopcontext.jsx";
 import { GlobalLayout } from "./pages/GlobalLayout.jsx";
+import { ScrollToTop } from "./components/ScrollToTop.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
+      <ScrollToTop />
       <ShopContextProvider>
         <Routes>
           <Route element={<GlobalLayout />}>

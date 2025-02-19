@@ -34,58 +34,56 @@ const Collection = () => {
   const applyFilter = () => {
     let productsCopy = products.slice();
 
-    // search
-    if (showSearch && search) {
-      productsCopy = productsCopy.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
+    // Filter by search term
+    if (showSearch && search.trim()) {
+      productsCopy = productsCopy.filter((item) =>
+        item.name.toLowerCase().includes(search.toLowerCase())
+      );
     }
 
-    // category
+    // Filter by category
     if (category.length > 0) {
       productsCopy = productsCopy.filter((item) =>
         category.includes(item.category)
       );
-
-      setfilterProducts(productsCopy);
     }
 
-    // subcategory
-
+    // Filter by subcategory
     if (subCategory.length > 0) {
       productsCopy = productsCopy.filter((item) =>
         subCategory.includes(item.subCategory)
       );
-
-      setfilterProducts(productsCopy);
     }
+
+    // Update filtered products state
+    setfilterProducts(productsCopy);
   };
 
   // function for sorting by prices
   const sortProducts = () => {
-    let filteredProductsCopy = filterProducts.slice();
+    let sortedProducts = [...filterProducts]; // Create a new copy
 
     switch (sortType) {
       case "low-high":
-        setfilterProducts(
-          filteredProductsCopy.sort((a, b) => a.price - b.price)
-        );
+        sortedProducts.sort((a, b) => a.price - b.price);
         break;
 
       case "high-low":
-        setfilterProducts(
-          filteredProductsCopy.sort((a, b) => b.price - a.price)
-        );
+        sortedProducts.sort((a, b) => b.price - a.price);
         break;
 
       default:
         applyFilter();
-        break;
+        return; // Exit early, so we don’t reset `filterProducts` below
     }
+
+    setfilterProducts(sortedProducts);
   };
 
   // calling all the products before when the page first load
   useEffect(() => {
     setfilterProducts(products);
-  }, []);
+  }, [products]);
 
   // calling the function that applies filters
   useEffect(() => {
@@ -215,15 +213,17 @@ const Collection = () => {
 
           {/* collection of products */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
-            {filterProducts.map((item, index) => (
-              <ProductCard
-                key={index}
-                id={item._id}
-                image={item.image}
-                name={item.name}
-                price={item.price}
-              />
-            ))}
+            {(filterProducts.length > 0 ? filterProducts : products).map(
+              (item, index) => (
+                <ProductCard
+                  key={index}
+                  id={item._id}
+                  image={item.image}
+                  name={item.name}
+                  price={item.price}
+                />
+              )
+            )}
           </div>
         </div>
       </div>

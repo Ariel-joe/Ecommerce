@@ -11,7 +11,16 @@ const ShopContextProvider = (props) => {
   const [showSearch, setShowSearch] = useState(false);
   const [cartItems, setCartItems] = useState({});
 
+  // function for searching a product
 
+  const filterProducts = () => {
+    if (!search.trim()) return products; // If search is empty, return all products
+  
+    return products.filter((product) =>
+      product.name.toLowerCase().includes(search.toLowerCase())
+    );
+  };
+  
   // func repsoible for adding items to cart
   const addToCart = async (itemId, size) => {
     if (size.length == 0) {
@@ -57,6 +66,7 @@ const ShopContextProvider = (props) => {
 
 
   const value = {
+    filterProducts,
     products,
     currency,
     delivery_fee,
