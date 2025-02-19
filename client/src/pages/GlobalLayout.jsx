@@ -5,7 +5,7 @@ import { Toaster } from "sonner";
 const GlobalLayout = () => {
   return (
     <>
-      <Toaster richColors position="top-right" />
+      <Toaster richColors position="top-center" />
       <Outlet />
     </>
   );
