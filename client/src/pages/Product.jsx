@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { ShopContext } from "../context/Shopcontext";
 import { assets } from "../assets/assets";
+import { RelatedProducts } from "../components/RelatedProducts";
 
 const Product = () => {
   const { productId } = useParams();
@@ -15,7 +16,6 @@ const Product = () => {
       if (item._id === productId) {
         setProductData(item);
         setImage(item.image[0]);
-        console.log(item);
 
         return null;
       }
@@ -47,7 +47,7 @@ const Product = () => {
 
             {/* view image display */}
             <div className="w-full sm:w-[80%]">
-              <img className="w-full h-auto" src={image} alt="" />
+              <img className="w-full" src={image} alt="" />
             </div>
 
             {/* product info */}
@@ -135,6 +135,12 @@ const Product = () => {
       </div>
 
       {/* related products */}
+      <RelatedProducts
+        category={productData.category}
+        subCategory={productData.subCategory}
+      />
+
+      <div></div>
     </>
   ) : (
     <div className="opacity-0"></div>
