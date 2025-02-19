@@ -42,7 +42,7 @@ const Cart = () => {
             return (
               <div
                 key={i}
-                className="py-4 border-t border-b text-gray-700 grid grid-cols[4fr_0.5fr_0.fr]  sm:grid-cols[4fr_2fr_0.fr] items-center gap-4"
+                className="py-4 border-t border-b text-gray-700  grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_1fr] items-center gap-4"
               >
                 <div className="flex gap-6">
                   <img
