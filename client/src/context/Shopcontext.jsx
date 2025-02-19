@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { products } from "../assets/assets";
+import { toast } from "sonner";
 
 export const ShopContext = createContext();
 
@@ -10,7 +11,13 @@ const ShopContextProvider = (props) => {
   const [showSearch, setShowSearch] = useState(false);
   const [cartItems, setCartItems] = useState({});
 
+
+  // func repsoible for adding items to cart
   const addToCart = async (itemId, size) => {
+    if (size.length == 0) {
+      return toast.error("please add the size!");
+    }
+
     let cartData = structuredClone(cartItems);
 
     if (cartData[itemId]) {
@@ -25,12 +32,29 @@ const ShopContextProvider = (props) => {
     }
 
     setCartItems(cartData);
+    toast.success("item added to cart")
   };
 
-  useEffect(() => {
-    console.log(cartItems);
-    
-  }, [cartItems])
+  const getCartCount = () => {
+
+    let totalCount = 0;
+    for(const items in cartItems){
+      for(const item in cartItems[items]){
+        try {
+          if (cartItems[items][item] > 0) {
+            totalCount += cartItems[items][item] 
+          }
+        } catch (error) {
+          
+        }
+      }
+    }
+
+    return totalCount;
+  }
+
+
+
 
   const value = {
     products,
@@ -42,6 +66,7 @@ const ShopContextProvider = (props) => {
     setShowSearch,
     addToCart,
     cartItems,
+    getCartCount,
   };
 
   return (

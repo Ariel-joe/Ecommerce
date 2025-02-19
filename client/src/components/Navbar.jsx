@@ -7,7 +7,7 @@ import { ShopContext } from "../context/Shopcontext";
 
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
-  const {setShowSearch} = useContext(ShopContext)
+  const {setShowSearch, getCartCount} = useContext(ShopContext)
 
   return (
     <>
@@ -91,7 +91,7 @@ const Navbar = () => {
           <Link to={"/cart"} className="relative">
             <CiShoppingCart size={28} className="cursor-pointer min-w-5" />
             <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
-              10
+              {getCartCount()}
             </p>
           </Link>
 
